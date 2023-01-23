@@ -1,33 +1,40 @@
-// this will deep copy objects and arrays
-// it's borked if you pass in any "array-like objects" or Date objects, weird things like that. 
-// but it can handle Arrays, Objects, Number, String, Boolean
-// I recently added support for functions, and a condition for unique classes but I haven't tested it much
-export const recursiveStateCopy = (oldState) => {
+/**
+ * this will deep copy variables
+ * I think it's borked if you pass in any built in weird javascript class instances or Date objects, nodelists, things like that
+ * but it can handle Arrays, Objects, Number, String, Boolean, and functions
+ * it probably won't work with react components
+ */
+export const recursiveStateCopy = (oldState: any): any => {
   if (thisIsPrimitive(oldState) || typeof oldState === 'function') return oldState
-  let newState;
-  if (Array.isArray(oldState)) {
-    newState = oldState.map(value => {
-      return recursiveStateCopy(value)
-    })
-  } else if (thisIsAnObject(oldState)) {
-    if (Object.getPrototypeOf(oldState).constructor.name === 'Object') {
-      // this is a normal object
-      newState = {}
-      Object.keys(oldState).forEach(key => {
-        newState[key] = recursiveStateCopy(oldState[key])
-      })
-    } else {
-      // must be a special class
-      return Object.assign(Object.create(Object.getPrototypeOf(oldState)), oldState)
-    }
+  let newState: any
+  if (oldState instanceof Map) {
+    newState = new Map([...oldState].map((pair) => recursiveStateCopy(pair)))
+  } else if (oldState instanceof Set) {
+    newState = new Set([...oldState].map((item) => recursiveStateCopy(item)))
+  } else if (Array.isArray(oldState)) {
+    newState = oldState.map(value => recursiveStateCopy(value))
+  } else if (thisIsAPlainObject(oldState)) {
+    // this is a boring-ass object
+    newState = Object.keys(oldState).reduce((acc, cur) => {
+      acc[cur] = recursiveStateCopy(oldState[cur])
+      return acc
+    }, {})
+  } else if (typeof oldState === 'object') {
+    // it's an object, but it didn't pass the plain object test above
+    // so this object must be an instance of some special class
+    // I haven't tested this thoroughly... it seems too easy
+    return Object.assign(Object.create(Object.getPrototypeOf(oldState)), oldState)
   }
-  return newState;
+  return newState
 }
 
-const thisIsAnObject = (thing) => {
-  return typeof thing === 'object' && !Array.isArray(thing)
+const thisIsAPlainObject = (thing: any) => {
+  return Object.getPrototypeOf(thing).constructor.name === 'Object'
 }
 
-const thisIsPrimitive = (thing) => {
+const thisIsPrimitive = (thing: any) => {
   return typeof thing === 'string' || typeof thing === 'number' || typeof thing === 'boolean'
 }
+
+
+export default recursiveStateCopy

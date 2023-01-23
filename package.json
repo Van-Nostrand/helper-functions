@@ -1,0 +1,17 @@
+{
+  "name": "@van_nostrand/helper-functions",
+  "version": "1.0.0",
+  "description": "util functions",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Van-Nostrand/helper-functions.git"
+  },
+  "keywords": [],
+  "author": "<Daniel Doull> dmdoull43@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Van-Nostrand/helper-functions/issues"
+  },
+  "homepage": "https://github.com/Van-Nostrand/helper-functions#readme"
+}
