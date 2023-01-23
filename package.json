@@ -7,9 +7,8 @@
     "type": "git",
     "url": "git+https://github.com/Van-Nostrand/helper-functions.git"
   },
-  "keywords": [],
   "author": "<Daniel Doull> dmdoull43@gmail.com",
-  "license": "ISC",
+  "license": "GNU GPLv3",
   "bugs": {
     "url": "https://github.com/Van-Nostrand/helper-functions/issues"
   },
