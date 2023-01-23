@@ -1,8 +1,10 @@
 {
   "name": "@van_nostrand/helper-functions",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "util functions",
-  "main": "index.ts",
+  "type": "module",
+  "main": "./src/cjs/index.js",
+  "module": "./src/esm/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Van-Nostrand/helper-functions.git"

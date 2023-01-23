@@ -4,9 +4,11 @@
  * but it can handle Arrays, Objects, Number, String, Boolean, and functions
  * it probably won't work with react components
  */
-export const recursiveStateCopy = (oldState: any): any => {
-  if (thisIsPrimitive(oldState) || typeof oldState === 'function') return oldState
-  let newState: any
+const recursiveStateCopy = (oldState) => {
+  if (thisIsPrimitive(oldState) || typeof oldState === 'function') {
+    return oldState
+  }
+  let newState
   if (oldState instanceof Map) {
     newState = new Map([...oldState].map((pair) => recursiveStateCopy(pair)))
   } else if (oldState instanceof Set) {
@@ -23,18 +25,17 @@ export const recursiveStateCopy = (oldState: any): any => {
     // it's an object, but it didn't pass the plain object test above
     // so this object must be an instance of some special class
     // I haven't tested this thoroughly... it seems too easy
-    return Object.assign(Object.create(Object.getPrototypeOf(oldState)), oldState)
+    newState = Object.assign(Object.create(Object.getPrototypeOf(oldState)), oldState)
   }
   return newState
 }
 
-const thisIsAPlainObject = (thing: any) => {
+const thisIsAPlainObject = (thing) => {
   return Object.getPrototypeOf(thing).constructor.name === 'Object'
 }
 
-const thisIsPrimitive = (thing: any) => {
+const thisIsPrimitive = (thing) => {
   return typeof thing === 'string' || typeof thing === 'number' || typeof thing === 'boolean'
 }
-
 
 export default recursiveStateCopy
