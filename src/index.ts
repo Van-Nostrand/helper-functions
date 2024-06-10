@@ -38,4 +38,11 @@ const thisIsPrimitive = (thing: unknown): thing is string | number | boolean => 
   return typeof thing === 'string' || typeof thing === 'number' || typeof thing === 'boolean'
 }
 
-module.exports = recursiveStateCopy
+const testLog = () => {
+  console.log('this is a test')
+}
+
+module.exports = {
+  recursiveStateCopy,
+  testLog
+}
