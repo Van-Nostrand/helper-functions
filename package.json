@@ -1,6 +1,6 @@
 {
   "name": "@van_nostrand/helper-functions",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "util functions",
   "type": "module",
   "main": "dist/index.js",
@@ -20,6 +20,7 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
+    "build": "tsc",
     "prepublish": "tsc"
   }
 }
