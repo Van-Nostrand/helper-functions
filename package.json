@@ -3,8 +3,8 @@
   "version": "1.1.0",
   "description": "util functions",
   "type": "module",
-  "main": "./src/cjs/index.js",
-  "module": "./src/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Van-Nostrand/helper-functions.git"
@@ -14,5 +14,12 @@
   "bugs": {
     "url": "https://github.com/Van-Nostrand/helper-functions/issues"
   },
-  "homepage": "https://github.com/Van-Nostrand/helper-functions#readme"
+  "homepage": "https://github.com/Van-Nostrand/helper-functions#readme",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "prepublish": "tsc"
+  }
 }
