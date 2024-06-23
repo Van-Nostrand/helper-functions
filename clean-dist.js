@@ -3,11 +3,11 @@ const fs = require('fs')
 function deleteFolderRecursive (path) {
   if (fs.existsSync(path) && fs.lstatSync(path).isDirectory()) {
     fs.readdirSync(path).forEach((file) => {
-      const curPath = path + "/" + file
+      const curPath = `${path}/${file}`
       
-      if (fs.lstatSync(curPath).isDirectory()) { // recurse
+      if (fs.lstatSync(curPath).isDirectory()) {
         deleteFolderRecursive(curPath)
-      } else { // delete file
+      } else {
         fs.unlinkSync(curPath)
       }
     })
