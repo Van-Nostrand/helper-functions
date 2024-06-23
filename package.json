@@ -1,10 +1,15 @@
 {
   "name": "@van_nostrand/helper-functions",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "util functions",
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Van-Nostrand/helper-functions.git"
@@ -20,7 +25,9 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "build": "tsc",
-    "prepublish": "tsc"
+    "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "prepare": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig.cjs.json",
+    "clean": "node clean-dist.js",
+    "update-package-types": ""
   }
 }
